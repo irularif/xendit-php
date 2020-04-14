@@ -43,6 +43,27 @@
             return $responseObject;
         }
 
+        function expireInvoice ($invoice_id) {
+            $curl = curl_init();
+
+            $headers = array();
+            $headers[] = 'Content-Type: application/json';
+
+            $end_point = $this->server_domain.'/v2/invoices/'.$invoice_id.'/expire!';
+
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($curl, CURLOPT_USERPWD, $this->secret_api_key.":");
+            curl_setopt($curl, CURLOPT_URL, $end_point);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+            $response = curl_exec($curl);
+            curl_close($curl);
+
+            $responseObject = json_decode($response, true);
+            return $responseObject;
+        }
+
         function createDisbursement ($external_id, $amount, $bank_code, $account_holder_name, $account_number, $disbursement_options = null) {
             $curl = curl_init();
 
