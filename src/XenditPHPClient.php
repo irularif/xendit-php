@@ -49,7 +49,7 @@
             $headers = array();
             $headers[] = 'Content-Type: application/json';
 
-            $end_point = $this->server_domain.'/v2/invoices/'.$invoice_id.'/expire!';
+            $end_point = $this->server_domain.'/invoices/'.$invoice_id.'/expire!';
 
             curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($curl, CURLOPT_USERPWD, $this->secret_api_key.":");
